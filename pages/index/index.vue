@@ -45,15 +45,14 @@
         >
           <image :src="item.image" class="exhibition-image"></image>
           <view class="exhibition-info">
-            <text class="name">{{ item.name }}</text>
-            <text class="time">{{ item.time }}</text>
-            <text class="address">{{ item.address }}</text>
-            <view class="details">
-              <text class="price">{{ item.price }}</text>
-              <text class="popularity">{{ item.popularity }}</text>
-            </view>
+            <view class="name">{{ item.name }}</view>
+            <view class="time">{{ item.time }}</view>
+            <view class="address">{{ item.address }}</view>
           </view>
-          <button class="subscribe-btn">订阅</button>
+          <view class="exhibition-other">
+            <view class="price">{{ item.price }}</view>
+            <view class="popularity">{{ item.popularity }}</view>
+          </view>
         </view>
       </view>
     </view>
@@ -168,7 +167,6 @@ const onTabbarChange = (e) => {
 
 .section-header {
   padding: 0 0 8px;
-  margin-bottom: 12px;
   border-bottom: 1px solid #ddd;
   display: flex;
   justify-content: space-between;
@@ -201,13 +199,13 @@ const onTabbarChange = (e) => {
 .exhibition-item {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 10px 0;
   border-bottom: 1px solid #ddd;
 }
 
 .exhibition-image {
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
   border-radius: 5px;
   margin-right: 10px;
 }
@@ -229,10 +227,16 @@ const onTabbarChange = (e) => {
   margin: 5px 0;
 }
 
-.details {
+.exhibition-other {
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  align-self: flex-end;
+  padding-bottom: 5px;
+}
+
+.exhibition-other view {
   margin-top: 5px;
 }
 
@@ -242,65 +246,14 @@ const onTabbarChange = (e) => {
   color: #999;
 }
 
-.icons {
-  display: flex;
-  align-items: center;
-  margin-top: 5px;
-}
-
-.icons .uni-icons {
-  margin-right: 10px;
-}
-
-.subscribe-btn {
-  background-color: #FF5722;
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 12px;
-  margin-left: 10px;
-}
-
-.hotness {
-  display: flex;
-  align-items: center;
-  margin-left: 10px;
-}
-
 .hotness text {
   font-size: 12px;
   color: #666;
 }
 
-.tags {
-  display: flex;
-  align-items: center;
-  margin-left: 10px;
-}
-
-.tag-G,
-.tag-一,
-.tag-二,
-.tag-三,
-.tag-四,
-.tag-五 {
-  font-size: 10px;
-  padding: 2px 4px;
-  border-radius: 2px;
-  margin-left: 5px;
-}
-
-.tag-G { background-color: #FFCC00; }
-.tag-一 { background-color: #FF5722; }
-.tag-二 { background-color: #FFCC00; }
-.tag-三 { background-color: #FFCC00; }
-.tag-四 { background-color: #FFCC00; }
-.tag-五 { background-color: #FFCC00; }
-
 .ad-section {
   width: 100%;
-  margin-top: 8px;
+  margin-top: 16px;
 }
 
 .ad-image {

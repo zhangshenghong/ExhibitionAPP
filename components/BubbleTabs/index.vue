@@ -40,7 +40,7 @@ const handleClick = (index) => {
 .bubble-tabs {
   display: flex;
   justify-content: center; /* 居中对齐 */
-  margin: 0 -10px;
+  margin: 0 -8px;
 }
 
 .bubble-tab {
@@ -51,7 +51,7 @@ const handleClick = (index) => {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: all 0.3s;
-  margin: 0 10px; /* 气泡项之间的间距 */
+  margin: 0 8px; /* 气泡项之间的间距 */
 }
 
 .bubble-tab.active {

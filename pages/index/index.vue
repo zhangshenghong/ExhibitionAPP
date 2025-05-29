@@ -1,0 +1,335 @@
+<template>
+  <view class="container">
+    <!-- 搜索框 -->
+    <view class="search-bar">
+      <input
+        class="search-input"
+        placeholder="搜索去哪儿展会~"
+        v-model="searchQuery"
+      />
+      <uni-icons type="search" size="20" class="search-icon"></uni-icons>
+    </view>
+
+    <!-- 顶部导航栏 -->
+    <view class="header">
+      <bubble-tabs
+        :items="items"
+        v-model="current"
+      ></bubble-tabs>
+    </view>
+
+    <!-- 轮播图/广告区域 -->
+    <swiper class="swiper" indicator-dots autoplay interval="3000" duration="1000">
+      <swiper-item v-for="(banner, index) in banners" :key="index">
+        <image :src="banner.image" class="swiper-image"></image>
+      </swiper-item>
+    </swiper>
+
+    <!-- 近期展会列表 -->
+    <view class="section">
+      <view class="section-header">
+        <picker @change="bindPickerChange" :value="exhibitionIndex" :range="exhibitionItems">
+          <view class="uni-input">{{ selectedExhibitionItem }}</view>
+          <uni-icons type="arrowright" size="16" class="picker-icon"></uni-icons>
+        </picker>
+        <text class="more" @click="showMore">
+          <uni-icons type="arrowright" size="16"></uni-icons>
+          更多
+        </text>
+      </view>
+      <view class="exhibition-list">
+        <view
+          class="exhibition-item" v-for="(item, index) in exhibitions"
+          :key="index"
+          @click="goToExhibitionDetail(item)"
+        >
+          <image :src="item.image" class="exhibition-image"></image>
+          <view class="exhibition-info">
+            <text class="name">{{ item.name }}</text>
+            <text class="time">{{ item.time }}</text>
+            <text class="address">{{ item.address }}</text>
+            <view class="details">
+              <text class="price">{{ item.price }}</text>
+              <text class="popularity">{{ item.popularity }}</text>
+            </view>
+          </view>
+          <button class="subscribe-btn">订阅</button>
+        </view>
+      </view>
+    </view>
+
+    <!-- 广告插入区域 -->
+    <view class="ad-section">
+      <image :src="adImage" mode="widthFix" class="ad-image"></image>
+    </view>
+  </view>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import BubbleTabs from '../../components/BubbleTabs/index.vue' // 引入自定义组件
+
+// 数据定义
+const current = ref(0)
+const items = ref(['会展全览', '活动指南', '抢票大厅', '本地生活'])
+const banners = ref([
+  { image: 'https://picsum.photos/800/300?random=1' },
+  { image: 'https://picsum.photos/800/300?random=2' }
+])
+const exhibitionIndex = ref(0)
+const exhibitionItems = ref(['近期展会', '热门展会', '即将开展'])
+const exhibitions = ref([
+  {
+    image: 'https://picsum.photos/40/40?random=1',
+    name: '会展名称1',
+    time: '会展时间1',
+    address: '会展地址1',
+    price: '免费',
+    popularity: '人气值1',
+    hotness: '114762 展会热度',
+    tags: ['G', '一', '二', '三', '四', '五']
+  },
+  {
+    image: 'https://picsum.photos/40/40?random=2',
+    name: '会展名称2',
+    time: '会展时间2',
+    address: '会展地址2',
+    price: '付费',
+    popularity: '人气值2',
+    hotness: '114762 展会热度',
+    tags: ['G', '一', '二', '三', '四', '五']
+  }
+])
+const adImage = ref('https://picsum.photos/600/100?random=1')
+const tabbarCurrent = ref(0)
+
+// 选中的展览项
+const selectedExhibitionItem = ref(exhibitionItems.value[exhibitionIndex.value])
+
+// 方法定义
+const onClickItem = (index) => {
+  if (current.value !== index) {
+    current.value = index
+  }
+}
+
+const bindPickerChange = (e) => {
+  exhibitionIndex.value = e.detail.value
+  selectedExhibitionItem.value = exhibitionItems.value[e.detail.value]
+}
+
+const showMore = () => {
+  // 展示更多展会的逻辑
+}
+
+const goToExhibitionDetail = (item) => {
+  // 跳转到展会详情页的逻辑
+}
+
+const onTabbarChange = (e) => {
+  tabbarCurrent.value = e
+}
+</script>
+
+<style>
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.swiper {
+  width: 100%;
+  height: 160px;
+  margin-top: 12px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.swiper-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.section {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.section-header {
+  padding: 0 0 8px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.uni-input {
+  float: left;
+}
+
+.picker-icon {
+  transform: rotate(90deg);
+  display: block;
+  float: left;
+  margin-top: 4px;
+  margin-left: 4px;
+}
+
+.more {
+  display: flex;
+  align-items: center;
+  color: #666;
+}
+
+.exhibition-list {
+  display: flex;
+  flex-direction: column; /* 每个项目占一行 */
+}
+
+.exhibition-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.exhibition-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.exhibition-info {
+  flex: 1;
+}
+
+.name {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+.time,
+.address {
+  font-size: 12px;
+  color: #666;
+  margin: 5px 0;
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.price,
+.popularity {
+  font-size: 12px;
+  color: #999;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.icons .uni-icons {
+  margin-right: 10px;
+}
+
+.subscribe-btn {
+  background-color: #FF5722;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  margin-left: 10px;
+}
+
+.hotness {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.hotness text {
+  font-size: 12px;
+  color: #666;
+}
+
+.tags {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.tag-G,
+.tag-一,
+.tag-二,
+.tag-三,
+.tag-四,
+.tag-五 {
+  font-size: 10px;
+  padding: 2px 4px;
+  border-radius: 2px;
+  margin-left: 5px;
+}
+
+.tag-G { background-color: #FFCC00; }
+.tag-一 { background-color: #FF5722; }
+.tag-二 { background-color: #FFCC00; }
+.tag-三 { background-color: #FFCC00; }
+.tag-四 { background-color: #FFCC00; }
+.tag-五 { background-color: #FFCC00; }
+
+.ad-section {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.ad-image {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5;
+  border-radius: 20px;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+}
+
+.search-input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+.search-icon {
+  margin-left: 8px;
+}
+</style>

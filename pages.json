@@ -4,13 +4,13 @@
 			"path": "pages/index/index"
 		},
 		{
-			"path": "pages/moments/moments"
+			"path": "pages/moments/index"
 		},
 		{
-			"path": "pages/plans/plans"
+			"path": "pages/plans/index"
 		},
 		{
-			"path": "pages/profile/profile"
+			"path": "pages/profile/index"
 		}
 	],
 	"globalStyle": {
@@ -42,19 +42,19 @@
 				"text": "首页"
 			},
 			{
-				"pagePath": "pages/moments/moments",
+				"pagePath": "pages/moments/index",
 				"text": "精彩时刻",
 				"iconPath": "static/extui.png",
 				"selectedIconPath": "static/extuiHL.png"
 			},
 			{
-				"pagePath": "pages/plans/plans",
+				"pagePath": "pages/plans/index",
 				"text": "出行计划",
 				"iconPath": "static/api.png",
 				"selectedIconPath": "static/apiHL.png"
 			},
 			{
-				"pagePath": "pages/profile/profile",
+				"pagePath": "pages/profile/index",
 				"text": "我的",
 				"iconPath": "static/template.png",
 				"selectedIconPath": "static/templateHL.png"

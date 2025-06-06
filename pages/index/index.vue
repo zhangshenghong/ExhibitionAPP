@@ -14,7 +14,9 @@
     <view class="header">
       <bubble-tabs
         :items="items"
+        :is-active="false"
         v-model="current"
+        @tab-click="goBubbleTabs"
       ></bubble-tabs>
     </view>
 
@@ -70,7 +72,12 @@ import BubbleTabs from '../../components/BubbleTabs/index.vue' // 引入自定�
 
 // 数据定义
 const current = ref(0)
-const items = ref(['会展全览', '活动指南', '抢票大厅', '本地生活'])
+const items = ref([
+  { label: '会展全览', to: '/pages/moments/index' },
+  { label: '活动指南', to: '/pages/moments/index' },
+  { label: '抢票大厅', to: '/pages/moments/index' },
+  { label: '本地生活', to: '/pages/moments/index' }
+])
 const banners = ref([
   { image: 'https://picsum.photos/800/300?random=1' },
   { image: 'https://picsum.photos/800/300?random=2' }
@@ -84,9 +91,7 @@ const exhibitions = ref([
     time: '会展时间1',
     address: '会展地址1',
     price: '免费',
-    popularity: '人气值1',
-    hotness: '114762 展会热度',
-    tags: ['G', '一', '二', '三', '四', '五']
+    popularity: '人气值1'
   },
   {
     image: 'https://picsum.photos/40/40?random=2',
@@ -94,39 +99,27 @@ const exhibitions = ref([
     time: '会展时间2',
     address: '会展地址2',
     price: '付费',
-    popularity: '人气值2',
-    hotness: '114762 展会热度',
-    tags: ['G', '一', '二', '三', '四', '五']
+    popularity: '人气值2'
   }
 ])
 const adImage = ref('https://picsum.photos/600/100?random=1')
-const tabbarCurrent = ref(0)
-
 // 选中的展览项
 const selectedExhibitionItem = ref(exhibitionItems.value[exhibitionIndex.value])
-
-// 方法定义
-const onClickItem = (index) => {
-  if (current.value !== index) {
-    current.value = index
-  }
-}
 
 const bindPickerChange = (e) => {
   exhibitionIndex.value = e.detail.value
   selectedExhibitionItem.value = exhibitionItems.value[e.detail.value]
 }
-
+// 展示更多展会的逻辑
 const showMore = () => {
-  // 展示更多展会的逻辑
 }
-
+// 跳转到展会详情页的逻辑
 const goToExhibitionDetail = (item) => {
-  // 跳转到展会详情页的逻辑
 }
-
-const onTabbarChange = (e) => {
-  tabbarCurrent.value = e
+// 处理顶部导航栏点击事件
+const goBubbleTabs = (item) => {
+	console.log(111, item)
+  uni.navigateTo({ url: item.to })
 }
 </script>
 
@@ -244,11 +237,6 @@ const onTabbarChange = (e) => {
 .popularity {
   font-size: 12px;
   color: #999;
-}
-
-.hotness text {
-  font-size: 12px;
-  color: #666;
 }
 
 .ad-section {

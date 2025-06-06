@@ -4,10 +4,10 @@
       v-for="(item, index) in items"
       :key="index"
       class="bubble-tab"
-      :class="{ 'active': currentIndex === index }"
+      :class="{ 'active': currentIndex === index && isActive }"
       @click="handleClick(index)"
     >
-      {{ item }}
+      {{ item.label }}
     </view>
   </view>
 </template>
@@ -23,16 +23,21 @@ const props = defineProps({
   modelValue: {
     type: Number,
     default: 0
+  },
+  isActive: {
+    type: Boolean,
+    default: true
   }
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'tab-click'])
 
 const currentIndex = ref(props.modelValue)
 
 const handleClick = (index) => {
   currentIndex.value = index
   emit('update:modelValue', index)
+  emit('tab-click', props.items[index], index)
 }
 </script>
 

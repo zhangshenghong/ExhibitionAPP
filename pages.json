@@ -11,6 +11,14 @@
 		},
 		{
 			"path": "pages/profile/index"
+		},
+		{
+			"path" : "pages/index/overview",
+			"style" : 
+			{
+				"enablePullDownRefresh" : true,
+				"navigationBarTitleText" : "水平排列，左图右文"
+			}
 		}
 	],
 	"globalStyle": {

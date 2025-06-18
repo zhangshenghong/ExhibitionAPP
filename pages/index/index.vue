@@ -73,7 +73,7 @@ import BubbleTabs from '../../components/BubbleTabs/index.vue' // 引入自定�
 // 数据定义
 const current = ref(0)
 const items = ref([
-  { label: '会展全览', to: '/pages/moments/index' },
+  { label: '会展全览', to: '/pages/index/overview' },
   { label: '活动指南', to: '/pages/moments/index' },
   { label: '抢票大厅', to: '/pages/moments/index' },
   { label: '本地生活', to: '/pages/moments/index' }
@@ -118,7 +118,6 @@ const goToExhibitionDetail = (item) => {
 }
 // 处理顶部导航栏点击事件
 const goBubbleTabs = (item) => {
-	console.log(111, item)
   uni.navigateTo({ url: item.to })
 }
 </script>
@@ -224,7 +223,7 @@ const goBubbleTabs = (item) => {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   align-self: flex-end;
   padding-bottom: 5px;
 }

@@ -81,7 +81,6 @@
 </script>
 
 <style lang="scss">
-
 	page {
 		display: flex;
 		flex-direction: column;
@@ -89,6 +88,15 @@
 		background-color: #efeff4;
 		min-height: 100%;
 		height: auto;
+	}
+	
+	uni-image{
+		width: 20vw;
+		height: 15vw;
+	}
+	
+	.uni-list-item__content{
+		margin-left: 10px;
 	}
 
 	.tips {

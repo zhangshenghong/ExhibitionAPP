@@ -13,8 +13,11 @@
 			"path": "pages/profile/index"
 		},
 		{
-			"path" : "pages/index/overview",
-			"style" : 
+			"path": "pages/search/index"
+		},
+		{
+			"path" : "pages/overview/index",
+			"style" :
 			{
 				"enablePullDownRefresh" : true
 			}

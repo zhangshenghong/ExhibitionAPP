@@ -6,6 +6,7 @@
         class="search-input"
         placeholder="搜索去哪儿展会~"
         v-model="searchQuery"
+        @confirm="performSearch"
       />
       <uni-icons type="search" size="20" class="search-icon"></uni-icons>
     </view>
@@ -72,8 +73,9 @@ import BubbleTabs from '../../components/BubbleTabs/index.vue' // 引入自定�
 
 // 数据定义
 const current = ref(0)
+const searchQuery = ref('')
 const items = ref([
-  { label: '会展全览', to: '/pages/index/overview' },
+  { label: '会展全览', to: '/pages/overview/index' },
   { label: '活动指南', to: '/pages/moments/index' },
   { label: '抢票大厅', to: '/pages/moments/index' },
   { label: '本地生活', to: '/pages/moments/index' }
@@ -119,6 +121,14 @@ const goToExhibitionDetail = (item) => {
 // 处理顶部导航栏点击事件
 const goBubbleTabs = (item) => {
   uni.navigateTo({ url: item.to })
+}
+const performSearch = () => {
+  if (searchQuery.value.trim()) {
+    uni.navigateTo({
+      url: `/pages/search/index?query=${encodeURIComponent(searchQuery.value)}`
+    })
+    searchQuery.value = ''
+  }
 }
 </script>
 

@@ -1,14 +1,21 @@
 <template>
   <view class="container">
-    <!-- 搜索框 -->
-    <view class="search-bar">
-      <input
-        class="search-input"
-        placeholder="搜索去哪儿展会~"
-        v-model="searchQuery"
-        @confirm="performSearch"
-      />
-      <uni-icons type="search" size="20" class="search-icon"></uni-icons>
+    <!-- 状态栏占位 -->
+    <view class="status-bar"></view>
+    
+    <!-- 顶部搜索栏 -->
+    <view class="search-section">
+      <view class="search-bar">
+        <uni-icons type="search" size="18" color="#999" class="search-icon"></uni-icons>
+        <input
+          class="search-input"
+          placeholder="搜索展会、活动..."
+          v-model="searchQuery"
+          confirm-type="search"
+          @confirm="handleSearch"
+        />
+        <view class="search-btn" @click="handleSearch">搜索</view>
+      </view>
     </view>
 
     <!-- 搜索结果 -->
@@ -133,34 +140,45 @@ const onPageScroll = () => {
 
 <style scoped>
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.status-bar {
+  height: var(--status-bar-height, 44px);
+  background: #007AFF;
+}
+
+.search-section {
   padding: 16px;
+  background: #007AFF;
 }
 
 .search-bar {
-  width: 100%;
   display: flex;
   align-items: center;
-  background-color: #f5f5f5;
-  border-radius: 20px;
-  padding: 8px 12px;
-  margin-bottom: 16px;
-  border: 1px solid #ddd;
-  box-sizing: border-box;
+  background: #ffffff;
+  border-radius: 25px;
+  padding: 8px 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-icon {
+  margin-right: 8px;
 }
 
 .search-input {
   flex: 1;
-  background: none;
-  border: none;
-  outline: none;
   font-size: 16px;
+  color: #333;
 }
 
-.search-icon {
+.search-btn {
+  padding: 6px 16px;
+  background: #007AFF;
+  color: white;
+  border-radius: 15px;
+  font-size: 14px;
   margin-left: 8px;
 }
 
